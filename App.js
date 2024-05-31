@@ -1,35 +1,32 @@
-import { StyleSheet, Text, View, SafeAreaView, Platform, StatusBar } from 'react-native';
-import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
-import React from 'react';
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
+import React from "react";
+import { RestaurantsScreen } from "./src/features/restaurants/screens/restaurants.screen";
+
+import {
+  useFonts as useOswald,
+  Oswald_400Regular,
+} from "@expo-google-fonts/oswald";
+import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
+
+import { ThemeProvider } from "styled-components";
+import { theme } from "./src/infrastructure/theme";
 
 export default function App() {
+  let [oswaldLoaded] = useOswald({
+    Oswald_400Regular,
+  });
+  let [latoLoaded] = useLato({
+    Lato_400Regular,
+  });
+
+  if (!oswaldLoaded || !latoLoaded) return null;
+
   return (
     <>
-    <SafeAreaView style={styles.container}>
-      <View style={styles.container1}>
-        <Text>asdfasd</Text>
-      </View>
-      <View style={styles.container2}>
-        <Text>asdfasd</Text>
-      </View>
-    </SafeAreaView >
-    <ExpoStatusBar style="auto" /> 
+      <ThemeProvider theme={theme}>
+        <RestaurantsScreen />
+      </ThemeProvider>
+      <ExpoStatusBar style="auto" />
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight,
-  },
-  container1: {
-    padding: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    backgroundColor: 'green'
-  },
-  container2: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: 'blue'
-  }
-});
