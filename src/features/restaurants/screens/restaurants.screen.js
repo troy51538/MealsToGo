@@ -1,12 +1,16 @@
-import React from "react";
-import { StyleSheet, StatusBar, SafeAreaView, FlatList } from "react-native";
-import { Searchbar } from "react-native-paper";
+import React, { useContext } from "react";
+import {
+  StyleSheet,
+  StatusBar,
+  SafeAreaView,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import { RestaurantInfoCard } from "../components/restaurant-info.components";
 import styled from "styled-components/native";
-
-const SearchComponent = styled.View`
-  padding: ${(props) => props.theme.sizes[3]};
-`;
+import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
+import { ActivityIndicator, Colors } from "react-native-paper";
+import { Search } from "../components/search.component";
 
 const RestaurantList = styled.View`
   flex: 1;
@@ -14,16 +18,31 @@ const RestaurantList = styled.View`
   background-color: ${(props) => props.theme.colors.bg.primary};
 `;
 
-export const RestaurantsScreen = () => {
+export const RestaurantsScreen = ({ navigation }) => {
+  const { restaurants, isLoading, error } = useContext(RestaurantsContext);
   return (
     <>
       <SafeAreaView style={styles.container}>
-        <SearchComponent>
-          <Searchbar />
-        </SearchComponent>
+        <Search />
+        {isLoading && (
+          <ActivityIndicator
+            animating={true}
+            color="#999999"
+          ></ActivityIndicator>
+        )}
         <FlatList
-          data={[{ name: 1 }, { name: 2 }, { name: 3 }]}
-          renderItem={() => <RestaurantInfoCard />}
+          data={restaurants}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("RestaurantDetail", { restaurant: item })
+                }
+              >
+                <RestaurantInfoCard restaurant={item} />
+              </TouchableOpacity>
+            );
+          }}
           keyExtractor={(item) => item.name}
           contentContainerStyle={{ padding: 16 }}
         />
