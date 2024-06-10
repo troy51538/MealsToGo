@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   StyleSheet,
   StatusBar,
@@ -9,6 +9,8 @@ import {
 import { RestaurantInfoCard } from "../components/restaurant-info.components";
 import styled from "styled-components/native";
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
+import { FavouritesContext } from "../../../services/favourites/favourites.context";
+import { FavouritesBar } from "../../../components/favourites/favourites-bar.component";
 import { ActivityIndicator, Colors } from "react-native-paper";
 import { Search } from "../components/search.component";
 
@@ -20,10 +22,22 @@ const RestaurantList = styled.View`
 
 export const RestaurantsScreen = ({ navigation }) => {
   const { restaurants, isLoading, error } = useContext(RestaurantsContext);
+  const { favourites } = useContext(FavouritesContext);
+  const [isToggled, setIsToggled] = useState(false);
+
   return (
     <>
       <SafeAreaView style={styles.container}>
-        <Search />
+        <Search
+          isFavouritesToggled={isToggled}
+          onFavouritesToggle={() => setIsToggled(!isToggled)}
+        />
+        {isToggled && (
+          <FavouritesBar
+            favourites={favourites}
+            onNavigate={navigation.navigate}
+          ></FavouritesBar>
+        )}
         {isLoading && (
           <ActivityIndicator
             animating={true}
