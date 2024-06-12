@@ -22,6 +22,8 @@ export const LoginScreen = ({ navigation }) => {
     <AccountBackground>
       <AccountCover />
       <Title>Meals To Go</Title>
+      <Spacer size="large"></Spacer>
+
       <AccountContainer>
         <AuthInput
           label="Email"

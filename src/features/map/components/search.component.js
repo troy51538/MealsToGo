@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { SafeAreaView } from "react-native";
 import { Searchbar } from "react-native-paper";
 import styled from "styled-components/native";
 import { LocationContext } from "../../../services/location/location.context";
@@ -20,18 +21,20 @@ export const Search = () => {
   }, [keyword]);
 
   return (
-    <SearchComponent>
-      <Searchbar
-        icon="map"
-        placeholder="Search for a location"
-        value={searchKeyword}
-        onSubmitEditing={() => {
-          search(searchKeyword);
-        }}
-        onChangeText={(text) => {
-          setSearchkeyword(text);
-        }}
-      />
-    </SearchComponent>
+    <SafeAreaView>
+      <SearchComponent>
+        <Searchbar
+          icon="map"
+          placeholder="Search for a location"
+          value={searchKeyword}
+          onSubmitEditing={() => {
+            search(searchKeyword);
+          }}
+          onChangeText={(text) => {
+            setSearchkeyword(text);
+          }}
+        />
+      </SearchComponent>
+    </SafeAreaView>
   );
 };

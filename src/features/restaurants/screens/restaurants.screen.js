@@ -13,6 +13,7 @@ import { FavouritesContext } from "../../../services/favourites/favourites.conte
 import { FavouritesBar } from "../../../components/favourites/favourites-bar.component";
 import { ActivityIndicator, Colors } from "react-native-paper";
 import { Search } from "../components/search.component";
+import { FadeInView } from "../../../components/animations/fade.animation";
 
 const RestaurantList = styled.View`
   flex: 1;
@@ -50,10 +51,14 @@ export const RestaurantsScreen = ({ navigation }) => {
             return (
               <TouchableOpacity
                 onPress={() =>
-                  navigation.navigate("RestaurantDetail", { restaurant: item })
+                  navigation.navigate("RestaurantDetail", {
+                    restaurant: item,
+                  })
                 }
               >
-                <RestaurantInfoCard restaurant={item} />
+                <FadeInView>
+                  <RestaurantInfoCard restaurant={item} />
+                </FadeInView>
               </TouchableOpacity>
             );
           }}

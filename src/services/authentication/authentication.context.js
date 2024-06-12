@@ -11,7 +11,6 @@ export const AuthenticationContextProvider = ({ children }) => {
 
   const auth = getAuth();
   onAuthStateChanged(auth, (user) => {
-    console.log(user);
     if (user) {
       setUser(user);
       setIsLoading(false);
