@@ -30,7 +30,10 @@ export const AuthButton = styled(Button).attrs({
   padding: ${(props) => props.theme.space[2]};
 `;
 
-export const AuthInput = styled(TextInput)`
+export const AuthInput = styled(TextInput).attrs({
+  outlineColor: colors.brand.primary,
+  activeOutlineColor: colors.brand.primary,
+})`
   width: 300px;
 `;
 

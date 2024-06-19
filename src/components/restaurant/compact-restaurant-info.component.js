@@ -21,6 +21,7 @@ const Item = styled.View`
   padding: 10px;
   max-width: 120px;
   align-items: center;
+  border-radius: 10px;
 `;
 
 const isAndroid = Platform.OS === "android";
