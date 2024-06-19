@@ -67,7 +67,7 @@ export const SettingsScreen = ({ navigation }) => {
                 <Avatar.Image
                   size={180}
                   source={{ uri: photo }}
-                  backgroundColor="#2182BD"
+                  backgroundColor={colors.brand.primary}
                 />
               )}
             </TouchableOpacity>
