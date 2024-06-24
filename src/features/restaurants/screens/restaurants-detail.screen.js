@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { SafeAreaView, StyleSheet, StatusBar, ScrollView } from "react-native";
 import { RestaurantInfoCard } from "../components/restaurant-info.components";
 import { List, Divider } from "react-native-paper";
+import { Spacer } from "../../../components/spacer/spacer.component";
 
 export const RestaurantDetailScreen = ({ route, navigation }) => {
   const { restaurant } = route.params;
@@ -24,7 +25,8 @@ export const RestaurantDetailScreen = ({ route, navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <RestaurantInfoCard restaurant={restaurant}></RestaurantInfoCard>
+      <Spacer size="large"/>
+      <RestaurantInfoCard restaurant={restaurant} ></RestaurantInfoCard>
       <ScrollView>
         <List.Accordion
           title="Breakfast"

@@ -10,6 +10,7 @@ const FavouritesWrapper = styled(Card)`
   padding: 10px;
   z-index: 999;
   border-radius: 15px;
+  margin: 24px;
 `;
 export const FavouritesBar = ({ favourites, onNavigate }) => {
   if (!favourites.length) {
