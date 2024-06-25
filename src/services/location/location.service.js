@@ -3,6 +3,11 @@ import camelize from "camelize";
 import { locations } from "./location.mock";
 
 export const locationRequest = (searchTerm) => {
+  // return fetch(
+  //   `http://localhost:5001/mealstogo-c4448/us-central1/geocode?city=${searchTerm}`
+  // ).then((res) => {
+  //   return res.json();
+  // });
   return new Promise((resolve, reject) => {
     const locationMock = locations[searchTerm];
     if (!locationMock) {
