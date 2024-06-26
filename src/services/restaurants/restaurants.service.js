@@ -7,6 +7,12 @@ export const restaurantsRequest = (location) => {
     if (!mock) reject("not found");
     resolve(mock);
   });
+
+  // return fetch(
+  //   `http://localhost:5001/mealstogo-c4448/us-central1/placesNearby?location=${location}`
+  // ).then((res) => {
+  //   return res.json();
+  // });
 };
 
 export const restaurantsTransform = ({ results = [] }) => {

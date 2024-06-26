@@ -35,6 +35,17 @@ export const RestaurantsContextProvider = ({ children }) => {
           setError(err);
         });
     }, 2000);
+
+    // restaurantsRequest(location)
+    //   .then(restaurantsTransform)
+    //   .then((results) => {
+    //     setIsLoading(false);
+    //     setRestaurants(results);
+    //   })
+    //   .catch((err) => {
+    //     setIsLoading(false);
+    //     setError(err);
+    //   });
   };
 
   useEffect(() => {
