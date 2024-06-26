@@ -9,7 +9,7 @@ export const loginRequest = (email, password) => {
   return signInWithEmailAndPassword(auth, email, password);
 };
 
-export const registerRequest = (email, password, repeatedPassword) => {
+export const registerRequest = (email, password) => {
   const auth = getAuth();
   return createUserWithEmailAndPassword(auth, email, password);
 };

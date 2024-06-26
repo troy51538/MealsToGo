@@ -7,8 +7,17 @@ import {
 } from "../components/account.styles";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import LottieView from "lottie-react-native";
+import { AuthenticationContext } from "../../../services/authentication/authentication.context";
+import { useFocusEffect } from "@react-navigation/native";
+import { useContext } from "react";
 
 export const AccountScreen = ({ navigation }) => {
+  const { setError } = useContext(AuthenticationContext);
+
+  useFocusEffect(() => {
+    setError("");
+  });
+
   return (
     <AccountBackground>
       <AccountCover />
