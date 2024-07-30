@@ -14,6 +14,7 @@ import { FavouritesBar } from "../../../components/favourites/favourites-bar.com
 import { ActivityIndicator, Colors } from "react-native-paper";
 import { Search } from "../components/search.component";
 import { FadeInView } from "../../../components/animations/fade.animation";
+import { NoRestaurantsComponent } from "../components/restaurants-empty.component";
 
 const RestaurantList = styled.View`
   flex: 1;
@@ -64,6 +65,7 @@ export const RestaurantsScreen = ({ navigation }) => {
           }}
           keyExtractor={(item) => item.name}
           contentContainerStyle={{ padding: 16 }}
+          ListEmptyComponent={!isLoading && NoRestaurantsComponent}
         />
       </SafeAreaView>
     </>
