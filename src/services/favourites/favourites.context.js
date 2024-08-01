@@ -4,7 +4,7 @@ import { AuthenticationContext } from "../authentication/authentication.context"
 export const FavouritesContext = createContext();
 
 export const FavouritesContextProvider = ({ children }) => {
-  const { user } = useContext(AuthenticationContext);
+  const { user, isAuthenticated } = useContext(AuthenticationContext);
 
   const [favourites, setFavourites] = useState([]);
   const saveFavourites = async (value, uid) => {
@@ -19,19 +19,10 @@ export const FavouritesContextProvider = ({ children }) => {
   const loadFavourites = async (uid) => {
     try {
       const value = await AsyncStorage.getItem(`@favourites-${uid}`);
-      const guestval = await AsyncStorage.getItem(`@favourites-guest`);
-
-      const a = JSON.parse(value);
-      const b = JSON.parse(guestval);
-
-      console.log("USER: ");
-      a.forEach((x) => console.log(x.address));
-
-      console.log("GUEST: ");
-      b.forEach((x) => console.log(x.address));
-
       if (value !== null) {
         setFavourites(JSON.parse(value));
+      } else {
+        setFavourites([]);
       }
     } catch (e) {
       console.log("error loading", e);
@@ -42,6 +33,7 @@ export const FavouritesContextProvider = ({ children }) => {
   };
 
   const remove = (restaurant) => {
+    favourites.forEach((x) => console.log(x.placeId));
     const newFavourites = favourites.filter(
       (x) => x.placeId !== restaurant.placeId
     );
@@ -49,7 +41,7 @@ export const FavouritesContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (user && user.uid) {
+    if (isAuthenticated) {
       loadFavourites(user.uid);
     } else {
       loadFavourites("guest");
@@ -57,14 +49,12 @@ export const FavouritesContextProvider = ({ children }) => {
   }, [user]);
 
   useEffect(() => {
-    if (favourites.length) {
-      if (user && user.uid) {
-        saveFavourites(favourites, user.uid);
-      } else {
-        saveFavourites(favourites, "guest");
-      }
+    if (isAuthenticated && favourites.length) {
+      saveFavourites(favourites, user.uid);
+    } else {
+      saveFavourites(favourites, "guest");
     }
-  }, [favourites, user]);
+  }, [favourites]);
 
   return (
     <FavouritesContext.Provider

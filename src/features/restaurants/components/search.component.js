@@ -5,6 +5,7 @@ import { LocationContext } from "../../../services/location/location.context";
 import * as Location from "expo-location";
 import { reverseGeocodeRequest } from "../../../services/location/location.service";
 import { isMock } from "../../../utils/env";
+import camelize from "camelize";
 
 const SearchComponent = styled.View`
   padding: ${(props) => props.theme.sizes[3]};
@@ -33,6 +34,8 @@ export const Search = ({}) => {
 
         let location = await Location.getCurrentPositionAsync({});
 
+        console.log(location.coords);
+
         reverseGeocodeRequest(
           location.coords.latitude + "," + location.coords.longitude
         ).then((result) => {
@@ -40,6 +43,7 @@ export const Search = ({}) => {
           formattedResponse.results.forEach((element) => {
             if (element.types.includes("street_address")) {
               setSearchkeyword(element.addressComponents[2].longName);
+              setIsUsingCurrentLocation(true);
             }
           });
         });
@@ -48,8 +52,8 @@ export const Search = ({}) => {
       }
     } else {
       setSearchkeyword("San Francisco");
+      setIsUsingCurrentLocation(true);
     }
-    setIsUsingCurrentLocation(true);
   };
 
   useEffect(() => {

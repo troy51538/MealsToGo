@@ -1,0 +1,99 @@
+[debug] [2024-08-01T19:14:00.083Z] ----------------------------------------------------------------------
+[debug] [2024-08-01T19:14:00.086Z] Command:       /opt/homebrew/Cellar/node/22.5.1/bin/node /usr/local/bin/firebase deploy --only functions
+[debug] [2024-08-01T19:14:00.086Z] CLI Version:   13.11.4
+[debug] [2024-08-01T19:14:00.086Z] Platform:      darwin
+[debug] [2024-08-01T19:14:00.086Z] Node Version:  v22.5.1
+[debug] [2024-08-01T19:14:00.087Z] Time:          Thu Aug 01 2024 15:14:00 GMT-0400 (Eastern Daylight Time)
+[debug] [2024-08-01T19:14:00.087Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-08-01T19:14:00.124Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-08-01T19:14:00.124Z] > authorizing via signed-in user (troy51538@gmail.com)
+[debug] [2024-08-01T19:14:00.124Z] [iam] checking project mealstogo-c4448 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2024-08-01T19:14:00.125Z] > refreshing access token with scopes: []
+[debug] [2024-08-01T19:14:00.126Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-08-01T19:14:00.126Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-08-01T19:14:00.472Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-08-01T19:14:00.472Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-08-01T19:14:00.495Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/mealstogo-c4448:testIamPermissions [none]
+[debug] [2024-08-01T19:14:00.495Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/mealstogo-c4448:testIamPermissions x-goog-quota-user=projects/mealstogo-c4448
+[debug] [2024-08-01T19:14:00.495Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/mealstogo-c4448:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2024-08-01T19:14:00.818Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/mealstogo-c4448:testIamPermissions 200
+[debug] [2024-08-01T19:14:00.818Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/mealstogo-c4448:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2024-08-01T19:14:00.819Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/mealstogo-c4448/serviceAccounts/mealstogo-c4448@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2024-08-01T19:14:00.819Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/mealstogo-c4448/serviceAccounts/mealstogo-c4448@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2024-08-01T19:14:01.358Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/mealstogo-c4448/serviceAccounts/mealstogo-c4448@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2024-08-01T19:14:01.359Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/mealstogo-c4448/serviceAccounts/mealstogo-c4448@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'mealstogo-c4448'...
+[info] 
+[info] i  deploying functions 
+[debug] [2024-08-01T19:14:01.363Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/mealstogo-c4448 [none]
+[debug] [2024-08-01T19:14:01.866Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/mealstogo-c4448 200
+[debug] [2024-08-01T19:14:01.866Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/mealstogo-c4448 {"projectId":"mealstogo-c4448","projectNumber":"250313286199","displayName":"MealsToGo","name":"projects/mealstogo-c4448","resources":{"hostingSite":"mealstogo-c4448"},"state":"ACTIVE","etag":"1_b6dd1337-6767-402f-bd38-f06ed52541e8"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2024-08-01T19:14:01.867Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/mealstogo-c4448/services/cloudfunctions.googleapis.com [none]
+[debug] [2024-08-01T19:14:01.867Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/mealstogo-c4448/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/mealstogo-c4448
+[debug] [2024-08-01T19:14:01.869Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/mealstogo-c4448/services/runtimeconfig.googleapis.com [none]
+[debug] [2024-08-01T19:14:01.869Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/mealstogo-c4448/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/mealstogo-c4448
+[debug] [2024-08-01T19:14:01.869Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/mealstogo-c4448/services/cloudbuild.googleapis.com [none]
+[debug] [2024-08-01T19:14:01.869Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/mealstogo-c4448/services/cloudbuild.googleapis.com x-goog-quota-user=projects/mealstogo-c4448
+[debug] [2024-08-01T19:14:01.870Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/mealstogo-c4448/services/artifactregistry.googleapis.com [none]
+[debug] [2024-08-01T19:14:01.870Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/mealstogo-c4448/services/artifactregistry.googleapis.com x-goog-quota-user=projects/mealstogo-c4448
+[debug] [2024-08-01T19:14:02.495Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/mealstogo-c4448/services/runtimeconfig.googleapis.com 200
+[debug] [2024-08-01T19:14:02.495Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/mealstogo-c4448/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2024-08-01T19:14:02.496Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/mealstogo-c4448/services/cloudbuild.googleapis.com 200
+[debug] [2024-08-01T19:14:02.496Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/mealstogo-c4448/services/cloudbuild.googleapis.com [omitted]
+[info] ✔  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2024-08-01T19:14:02.496Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/mealstogo-c4448/services/artifactregistry.googleapis.com 200
+[debug] [2024-08-01T19:14:02.496Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/mealstogo-c4448/services/artifactregistry.googleapis.com [omitted]
+[info] ✔  artifactregistry: required API artifactregistry.googleapis.com is enabled 
+[debug] [2024-08-01T19:14:02.499Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/mealstogo-c4448/services/cloudfunctions.googleapis.com 200
+[debug] [2024-08-01T19:14:02.499Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/mealstogo-c4448/services/cloudfunctions.googleapis.com [omitted]
+[info] ✔  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2024-08-01T19:14:02.499Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/mealstogo-c4448/adminSdkConfig [none]
+[debug] [2024-08-01T19:14:02.782Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/mealstogo-c4448/adminSdkConfig 200
+[debug] [2024-08-01T19:14:02.783Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/mealstogo-c4448/adminSdkConfig {"projectId":"mealstogo-c4448","storageBucket":"mealstogo-c4448.appspot.com"}
+[debug] [2024-08-01T19:14:02.784Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/mealstogo-c4448/configs [none]
+[debug] [2024-08-01T19:14:03.150Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/mealstogo-c4448/configs 200
+[debug] [2024-08-01T19:14:03.150Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/mealstogo-c4448/configs {}
+[debug] [2024-08-01T19:14:03.152Z] Validating nodejs source
+[debug] [2024-08-01T19:14:03.596Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "22"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.4.0",
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^5.0.0"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
+}
+[debug] [2024-08-01T19:14:03.596Z] Building nodejs source
+[info] i  functions: Loading and analyzing source code for codebase default to determine what to deploy 
+[debug] [2024-08-01T19:14:03.597Z] Could not find functions.yaml. Must use http discovery
+[debug] [2024-08-01T19:14:03.603Z] Found firebase-functions binary at '/Users/joonyoungim/Documents/react-native/dsaf/MealsToGo/functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8951
+
+[debug] [2024-08-01T19:14:04.123Z] Got response from /__/functions.yaml {"endpoints":{"geocode":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"geocode"},"placesNearby":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"placesNearby"},"reverseGeocode":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"reverseGeocode"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] i  functions: preparing functions directory for uploading... 
+[info] i  functions: packaged /Users/joonyoungim/Documents/react-native/dsaf/MealsToGo/functions (144.12 KB) for uploading 
+[debug] [2024-08-01T19:14:09.178Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/projects/mealstogo-c4448/locations/-/functions [none]
+[debug] [2024-08-01T19:14:09.900Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/projects/mealstogo-c4448/locations/-/functions 200
+[debug] [2024-08-01T19:14:09.901Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/projects/mealstogo-c4448/locations/-/functions {"functions":[{"name":"projects/mealstogo-c4448/locations/us-central1/functions/placesNearby","httpsTrigger":{"url":"https://us-central1-mealstogo-c4448.cloudfunctions.net/placesNearby","securityLevel":"SECURE_ALWAYS"},"status":"ACTIVE","entryPoint":"placesNearby","timeout":"60s","availableMemoryMb":256,"serviceAccountEmail":"mealstogo-c4448@appspot.gserviceaccount.com","updateTime":"2024-08-01T18:15:56.782Z","versionId":"3","labels":{"deployment-tool":"cli-firebase","firebase-functions-hash":"d3dbc1a68f5574635b9991736de4056d7cb334d4"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-564981023321.us-central1.cloudfunctions.appspot.com/d86d8c88-008c-48ac-b806-c0237f7436e2.zip","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"mealstogo-c4448\",\"storageBucket\":\"mealstogo-c4448.appspot.com\"}","GCLOUD_PROJECT":"mealstogo-c4448","EVENTARC_CLOUD_EVENT_SOURCE":"projects/mealstogo-c4448/locations/us-central1/functions/placesNearby"},"runtime":"nodejs22","ingressSettings":"ALLOW_ALL","buildId":"cde2eee1-d662-4c81-8e13-c2c3d97eb1a9","buildEnvironmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""},"buildName":"projects/250313286199/locations/us-central1/builds/cde2eee1-d662-4c81-8e13-c2c3d97eb1a9","dockerRegistry":"ARTIFACT_REGISTRY","automaticUpdatePolicy":{}},{"name":"projects/mealstogo-c4448/locations/us-central1/functions/geocode","httpsTrigger":{"url":"https://us-central1-mealstogo-c4448.cloudfunctions.net/geocode","securityLevel":"SECURE_ALWAYS"},"status":"ACTIVE","entryPoint":"geocode","timeout":"60s","availableMemoryMb":256,"serviceAccountEmail":"mealstogo-c4448@appspot.gserviceaccount.com","updateTime":"2024-08-01T18:15:47.484Z","versionId":"3","labels":{"deployment-tool":"cli-firebase","firebase-functions-hash":"d3dbc1a68f5574635b9991736de4056d7cb334d4"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-564981023321.us-central1.cloudfunctions.appspot.com/d86d8c88-008c-48ac-b806-c0237f7436e2.zip","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"mealstogo-c4448\",\"storageBucket\":\"mealstogo-c4448.appspot.com\"}","GCLOUD_PROJECT":"mealstogo-c4448","EVENTARC_CLOUD_EVENT_SOURCE":"projects/mealstogo-c4448/locations/us-central1/functions/geocode"},"runtime":"nodejs22","ingressSettings":"ALLOW_ALL","buildId":"cde2eee1-d662-4c81-8e13-c2c3d97eb1a9","buildEnvironmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""},"buildName":"projects/250313286199/locations/us-central1/builds/cde2eee1-d662-4c81-8e13-c2c3d97eb1a9","dockerRegistry":"ARTIFACT_REGISTRY","automaticUpdatePolicy":{}},{"name":"projects/mealstogo-c4448/locations/us-central1/functions/reverseGeocode","httpsTrigger":{"url":"https://us-central1-mealstogo-c4448.cloudfunctions.net/reverseGeocode","securityLevel":"SECURE_ALWAYS"},"status":"ACTIVE","entryPoint":"reverseGeocode","timeout":"60s","availableMemoryMb":256,"serviceAccountEmail":"mealstogo-c4448@appspot.gserviceaccount.com","updateTime":"2024-08-01T18:15:56.644Z","versionId":"2","labels":{"firebase-functions-hash":"d3dbc1a68f5574635b9991736de4056d7cb334d4","deployment-tool":"cli-firebase"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-564981023321.us-central1.cloudfunctions.appspot.com/d86d8c88-008c-48ac-b806-c0237f7436e2.zip","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"mealstogo-c4448\",\"storageBucket\":\"mealstogo-c4448.appspot.com\"}","GCLOUD_PROJECT":"mealstogo-c4448","EVENTARC_CLOUD_EVENT_SOURCE":"projects/mealstogo-c4448/locations/us-central1/functions/reverseGeocode"},"runtime":"nodejs22","ingressSettings":"ALLOW_ALL","buildId":"cde2eee1-d662-4c81-8e13-c2c3d97eb1a9","buildEnvironmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""},"buildName":"projects/250313286199/locations/us-central1/builds/cde2eee1-d662-4c81-8e13-c2c3d97eb1a9","dockerRegistry":"ARTIFACT_REGISTRY","automaticUpdatePolicy":{}}]}
+[debug] [2024-08-01T19:14:09.903Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/mealstogo-c4448/locations/-/functions filter=environment%3D%22GEN_2%22
