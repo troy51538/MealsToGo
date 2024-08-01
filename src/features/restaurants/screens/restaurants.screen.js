@@ -25,21 +25,15 @@ const RestaurantList = styled.View`
 export const RestaurantsScreen = ({ navigation }) => {
   const { restaurants, isLoading, error } = useContext(RestaurantsContext);
   const { favourites } = useContext(FavouritesContext);
-  const [isToggled, setIsToggled] = useState(false);
 
   return (
     <>
       <SafeAreaView style={styles.container}>
-        <Search
-          isFavouritesToggled={isToggled}
-          onFavouritesToggle={() => setIsToggled(!isToggled)}
-        />
-        {isToggled && (
-          <FavouritesBar
-            favourites={favourites}
-            onNavigate={navigation.navigate}
-          ></FavouritesBar>
-        )}
+        <Search />
+        <FavouritesBar
+          favourites={favourites}
+          onNavigate={navigation.navigate}
+        ></FavouritesBar>
         {isLoading && (
           <ActivityIndicator
             animating={true}

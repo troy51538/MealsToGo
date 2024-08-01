@@ -3,6 +3,7 @@ import styled from "styled-components/native";
 import { Searchbar } from "react-native-paper";
 
 import { LocationContext } from "../../../services/location/location.context";
+import { SafeAreaView } from "react-native";
 
 const SearchContainer = styled.View`
   padding: ${(props) => props.theme.space[3]};
@@ -20,17 +21,19 @@ export const Search = () => {
   }, [keyword]);
   return (
     <SearchContainer>
-      <Searchbar
-        placeholder="Search for a location"
-        icon="map"
-        value={searchKeyword}
-        onSubmitEditing={() => {
-          search(searchKeyword);
-        }}
-        onChangeText={(text) => {
-          setSearchKeyword(text);
-        }}
-      />
+      <SafeAreaView>
+        <Searchbar
+          placeholder="Search for a location"
+          icon="map"
+          value={searchKeyword}
+          onSubmitEditing={() => {
+            search(searchKeyword);
+          }}
+          onChangeText={(text) => {
+            setSearchKeyword(text);
+          }}
+        />
+      </SafeAreaView>
     </SearchContainer>
   );
 };

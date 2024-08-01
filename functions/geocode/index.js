@@ -28,6 +28,7 @@ module.exports.geocodeRequest = (request, response, client) => {
 
 module.exports.reverseGeocodeRequest = (request, response, client) => {
   const { latlng, mock } = url.parse(request.url, true).query;
+
   client
     .reverseGeocode({
       params: {
