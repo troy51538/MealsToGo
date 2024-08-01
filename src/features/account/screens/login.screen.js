@@ -27,15 +27,16 @@ export const LoginScreen = ({ navigation }) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 0,
-          routes: [{ name: "Settings" }],
-        })
-      );
-      navigation.navigate("Restaurants");
+      // navigation.dispatch(
+      //   CommonActions.reset({
+      //     index: 0,
+      //     routes: [{ name: "Restaurants" }, { name: "Map" }],
+      //   })
+      // );
+      navigation.navigate("Settings");
     }
   }, [isAuthenticated]);
+
   return (
     <AccountBackground>
       <AccountCover />

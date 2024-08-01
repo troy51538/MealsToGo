@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { List, Avatar, ActivityIndicator } from "react-native-paper";
 import { Text } from "../../../components/typography/text.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
@@ -27,6 +27,7 @@ export const SettingsContainer = styled.View`
   position: absolute;
   width: 100%;
   height: 100%;
+  padding: ${(props) => props.theme.space[2]};
 `;
 
 const SettingsItem = styled(List.Item)`
@@ -38,9 +39,10 @@ const AvatarContainer = styled.View`
 `;
 
 export const SettingsScreen = ({ navigation }) => {
-  const { onLogout, user } = useContext(AuthenticationContext);
+  const { onLogout, user, isLoading, isAuthenticated } = useContext(
+    AuthenticationContext
+  );
   const [photo, setPhoto] = useState(null);
-  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const getProfilePicture = async (currentUser) => {
     if (currentUser) {
@@ -57,54 +59,73 @@ export const SettingsScreen = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <SettingsBackground>
         <SettingsContainer>
-          <AvatarContainer>
-            <TouchableOpacity onPress={() => navigation.navigate("Camera")}>
-              {!photo && (
-                <Avatar.Icon
-                  size={180}
-                  icon="human"
-                  backgroundColor={colors.brand.primary}
-                />
-              )}
-              {photo && (
-                <Avatar.Image
-                  size={180}
-                  source={{ uri: photo }}
-                  backgroundColor={colors.brand.primary}
-                />
-              )}
-            </TouchableOpacity>
-            {user ? (
-              <Spacer position="top" size="large">
-                <Text variant="label">{user.email}</Text>
-              </Spacer>
-            ) : null}
-          </AvatarContainer>
+          {isAuthenticated ? (
+            <>
+              <AvatarContainer>
+                <TouchableOpacity onPress={() => navigation.navigate("Camera")}>
+                  {!photo && (
+                    <Avatar.Icon
+                      size={180}
+                      icon="human"
+                      backgroundColor={colors.brand.primary}
+                    />
+                  )}
+                  {photo && (
+                    <Avatar.Image
+                      size={180}
+                      source={{ uri: photo }}
+                      backgroundColor={colors.brand.primary}
+                    />
+                  )}
+                </TouchableOpacity>
+                <Spacer position="top" size="large">
+                  <Text variant="label">{user.email}</Text>
+                </Spacer>
+              </AvatarContainer>
 
-          <List.Section>
-            <SettingsItem
-              style={{ padding: 16 }}
-              title="Favourites"
-              description="View your favourites"
-              left={(props) => (
-                <List.Icon {...props} color={colors.ui.error} icon="heart" />
-              )}
-              onPress={() => navigation.navigate("Favourites")}
-            />
-            {user ? (
+              <List.Section>
+                <SettingsItem
+                  style={{ padding: 16 }}
+                  title="Favourites"
+                  description="View your favourites"
+                  left={(props) => (
+                    <List.Icon
+                      {...props}
+                      color={colors.ui.error}
+                      icon="heart"
+                    />
+                  )}
+                  onPress={() => navigation.navigate("Favourites")}
+                />
+                {!isLoading ? (
+                  <SettingsItem
+                    style={{ padding: 16 }}
+                    title="Log out"
+                    left={(props) => (
+                      <List.Icon
+                        {...props}
+                        color={colors.ui.secondary}
+                        icon="door"
+                      />
+                    )}
+                    onPress={onLogout}
+                  />
+                ) : (
+                  <ActivityIndicator animating={true} color="blue" />
+                )}
+              </List.Section>
+            </>
+          ) : (
+            <List.Section>
               <SettingsItem
                 style={{ padding: 16 }}
-                title="Log out"
+                title="Favourites"
+                description="View your favourites"
                 left={(props) => (
-                  <List.Icon
-                    {...props}
-                    color={colors.ui.secondary}
-                    icon="door"
-                  />
+                  <List.Icon {...props} color={colors.ui.error} icon="heart" />
                 )}
-                onPress={onLogout}
+                onPress={() => navigation.navigate("Favourites")}
               />
-            ) : (
               <SettingsItem
                 style={{ padding: 16 }}
                 title="Log in"
@@ -117,8 +138,8 @@ export const SettingsScreen = ({ navigation }) => {
                 )}
                 onPress={() => navigation.navigate("Login")}
               />
-            )}
-          </List.Section>
+            </List.Section>
+          )}
         </SettingsContainer>
       </SettingsBackground>
     </SafeAreaView>

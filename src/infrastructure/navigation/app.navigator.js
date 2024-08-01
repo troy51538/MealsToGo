@@ -16,7 +16,7 @@ const Tab = createBottomTabNavigator();
 const TAB_ICON = {
   Restaurants: "food-fork-drink",
   Map: "map",
-  Settings: "cog-outline",
+  Account: "account",
 };
 
 const createScreenOptions = ({ route }) => {
@@ -42,7 +42,7 @@ export const AppNavigator = () => (
         >
           <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
           <Tab.Screen name="Map" component={MapScreen} />
-          <Tab.Screen name="Settings" component={SettingsNavigator} />
+          <Tab.Screen name="Account" component={SettingsNavigator} />
         </Tab.Navigator>
       </RestaurantsContextProvider>
     </LocationContextProvider>

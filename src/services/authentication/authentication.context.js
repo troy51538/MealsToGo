@@ -1,5 +1,5 @@
 import { loginRequest, registerRequest } from "./authentication.service";
-import React, { useState, createContext, useRef } from "react";
+import React, { useState, createContext, useRef, useEffect } from "react";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
 export const AuthenticationContext = createContext();
@@ -24,7 +24,7 @@ export const AuthenticationContextProvider = ({ children }) => {
     setIsLoading(true);
     loginRequest(email, password)
       .then((u) => {
-        setUser(u);
+        setUser(u.user);
         setIsLoading(false);
       })
       .catch((e) => {
@@ -41,25 +41,27 @@ export const AuthenticationContextProvider = ({ children }) => {
     setIsLoading(true);
     registerRequest(email, password)
       .then((u) => {
-        setUser(u);
-        setIsLoading(false);
+        setUser(u.user);
       })
       .catch((e) => {
-        setIsLoading(false);
         setError(e.toString());
       });
+    setIsLoading(false);
   };
 
   const onLogout = () => {
     const auth = getAuth();
     setIsLoading(true);
-    signOut(auth)
-      .then(() => {
-        setUser(null);
-        setError(null);
-      })
-      .catch((e) => {});
-    setIsLoading(false);
+
+    setTimeout(() => {
+      signOut(auth)
+        .then(() => {
+          setUser(null);
+          setError(null);
+        })
+        .catch((e) => {});
+      setIsLoading(false);
+    }, 500);
   };
 
   return (

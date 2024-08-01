@@ -10,6 +10,7 @@ import { initializeApp } from "firebase/app";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./src/infrastructure/theme";
 import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
+import { NativeModules } from "react-native";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAlaBQiB3s_-T8uNgCbKjx87QLbi9pHDjI",
@@ -31,6 +32,8 @@ export default function App() {
   });
 
   if (!oswaldLoaded || !latoLoaded) return null;
+
+  NativeModules.DevSettings.setIsDebuggingRemotely(true);
 
   return (
     <ThemeProvider theme={theme}>
