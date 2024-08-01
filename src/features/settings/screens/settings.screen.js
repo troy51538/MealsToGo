@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { List, Avatar } from "react-native-paper";
+import { List, Avatar, ActivityIndicator } from "react-native-paper";
 import { Text } from "../../../components/typography/text.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import {
@@ -40,10 +40,13 @@ const AvatarContainer = styled.View`
 export const SettingsScreen = ({ navigation }) => {
   const { onLogout, user } = useContext(AuthenticationContext);
   const [photo, setPhoto] = useState(null);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const getProfilePicture = async (currentUser) => {
-    const photoUri = await AsyncStorage.getItem(`${currentUser.uid}-photo`);
-    setPhoto(photoUri);
+    if (currentUser) {
+      const photoUri = await AsyncStorage.getItem(`${currentUser.uid}-photo`);
+      setPhoto(photoUri);
+    }
   };
 
   useFocusEffect(() => {
@@ -71,9 +74,11 @@ export const SettingsScreen = ({ navigation }) => {
                 />
               )}
             </TouchableOpacity>
-            <Spacer position="top" size="large">
-              <Text variant="label">{user.email}</Text>
-            </Spacer>
+            {user ? (
+              <Spacer position="top" size="large">
+                <Text variant="label">{user.email}</Text>
+              </Spacer>
+            ) : null}
           </AvatarContainer>
 
           <List.Section>
@@ -86,14 +91,33 @@ export const SettingsScreen = ({ navigation }) => {
               )}
               onPress={() => navigation.navigate("Favourites")}
             />
-            <SettingsItem
-              style={{ padding: 16 }}
-              title="Logout"
-              left={(props) => (
-                <List.Icon {...props} color={colors.ui.secondary} icon="door" />
-              )}
-              onPress={onLogout}
-            />
+            {user ? (
+              <SettingsItem
+                style={{ padding: 16 }}
+                title="Log out"
+                left={(props) => (
+                  <List.Icon
+                    {...props}
+                    color={colors.ui.secondary}
+                    icon="door"
+                  />
+                )}
+                onPress={onLogout}
+              />
+            ) : (
+              <SettingsItem
+                style={{ padding: 16 }}
+                title="Log in"
+                left={(props) => (
+                  <List.Icon
+                    {...props}
+                    color={colors.ui.secondary}
+                    icon="door"
+                  />
+                )}
+                onPress={() => navigation.navigate("Login")}
+              />
+            )}
           </List.Section>
         </SettingsContainer>
       </SettingsBackground>

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   AccountBackground,
   AccountCover,
@@ -12,12 +12,30 @@ import { Spacer } from "../../../components/spacer/spacer.component";
 import { Text } from "../../../components/typography/text.component";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 import { ActivityIndicator } from "react-native-paper";
+import { CommonActions } from "@react-navigation/native";
 
 export const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { onLogin, isLoading, error } = useContext(AuthenticationContext);
+  const { onLogin, isLoading, error, isAuthenticated } = useContext(
+    AuthenticationContext
+  );
 
+  const handleLogin = () => {
+    onLogin(email, password);
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: "Settings" }],
+        })
+      );
+      navigation.navigate("Restaurants");
+    }
+  }, [isAuthenticated]);
   return (
     <AccountBackground>
       <AccountCover />
@@ -54,7 +72,7 @@ export const LoginScreen = ({ navigation }) => {
           <AuthButton
             icon="lock-open-outline"
             mode="contained"
-            onPress={() => onLogin(email, password)}
+            onPress={handleLogin}
           >
             LOGIN
           </AuthButton>
@@ -63,8 +81,11 @@ export const LoginScreen = ({ navigation }) => {
         )}
       </AccountContainer>
       <Spacer size="large">
-        <AuthButton mode="contained" onPress={() => navigation.goBack()}>
-          Back
+        <AuthButton
+          mode="contained"
+          onPress={() => navigation.navigate("Register")}
+        >
+          Sign up
         </AuthButton>
       </Spacer>
     </AccountBackground>

@@ -6,6 +6,7 @@ import {
 } from "./location.service";
 import * as Location from "expo-location";
 import camelize from "camelize";
+import { isMock } from "../../utils/env";
 export const LocationContext = React.createContext();
 
 export const LocationContextProvider = ({ children }) => {
@@ -17,29 +18,33 @@ export const LocationContextProvider = ({ children }) => {
 
   useEffect(() => {
     const getLocation = async () => {
-      try {
-        let { status } = await Location.requestForegroundPermissionsAsync();
-
-        if (permission && permission.status !== "granted") {
+      if (!isMock) {
+        try {
           let { status } = await Location.requestForegroundPermissionsAsync();
-          setKeyword("San Francisco");
-          return;
-        }
 
-        let location = await Location.getCurrentPositionAsync({});
+          if (permission && permission.status !== "granted") {
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            setKeyword("San Francisco");
+            return;
+          }
 
-        reverseGeocodeRequest(
-          location.coords.latitude + "," + location.coords.longitude
-        ).then((result) => {
-          const formattedResponse = camelize(result);
-          formattedResponse.results.forEach((element) => {
-            if (element.types.includes("street_address")) {
-              setKeyword(element.addressComponents[2].longName);
-            }
+          let location = await Location.getCurrentPositionAsync({});
+
+          reverseGeocodeRequest(
+            location.coords.latitude + "," + location.coords.longitude
+          ).then((result) => {
+            const formattedResponse = camelize(result);
+            formattedResponse.results.forEach((element) => {
+              if (element.types.includes("street_address")) {
+                setKeyword(element.addressComponents[2].longName);
+              }
+            });
           });
-        });
-      } catch (error) {
-        console.error("Error requesting location permission:", error);
+        } catch (error) {
+          console.error("Error requesting location permission:", error);
+        }
+      } else {
+        setKeyword("San Francisco");
       }
     };
     getLocation();

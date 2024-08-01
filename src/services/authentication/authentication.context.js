@@ -11,14 +11,14 @@ export const AuthenticationContextProvider = ({ children }) => {
 
   const auth = useRef(getAuth()).current;
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setUser(user);
-      setIsLoading(false);
-    } else {
-      setIsLoading(false);
-    }
-  });
+  // onAuthStateChanged(auth, (user) => {
+  //   if (user) {
+  //     setUser(user);
+  //     setIsLoading(false);
+  //   } else {
+  //     setIsLoading(false);
+  //   }
+  // });
 
   const onLogin = (email, password) => {
     setIsLoading(true);
@@ -52,12 +52,14 @@ export const AuthenticationContextProvider = ({ children }) => {
 
   const onLogout = () => {
     const auth = getAuth();
+    setIsLoading(true);
     signOut(auth)
       .then(() => {
         setUser(null);
         setError(null);
       })
       .catch((e) => {});
+    setIsLoading(false);
   };
 
   return (
