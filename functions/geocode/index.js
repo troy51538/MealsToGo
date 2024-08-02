@@ -28,7 +28,10 @@ module.exports.geocodeRequest = (request, response, client) => {
 
 module.exports.reverseGeocodeRequest = (request, response, client) => {
   const { latlng, mock } = url.parse(request.url, true).query;
-
+  if (mock === "true") {
+    const locationMock = locationsMock["san francisco"];
+    return response.json(locationMock);
+  }
   client
     .reverseGeocode({
       params: {
@@ -38,6 +41,7 @@ module.exports.reverseGeocodeRequest = (request, response, client) => {
       timeout: 1000,
     })
     .then((res) => {
+      console.log(res.data);
       return response.json(res.data);
     })
     .catch((e) => {
