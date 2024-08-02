@@ -41,7 +41,6 @@ module.exports.reverseGeocodeRequest = (request, response, client) => {
       timeout: 1000,
     })
     .then((res) => {
-      console.log(res.data);
       return response.json(res.data);
     })
     .catch((e) => {

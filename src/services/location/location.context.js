@@ -30,14 +30,11 @@ export const LocationContextProvider = ({ children }) => {
 
           let location = await Location.getCurrentPositionAsync({});
 
-          console.log(location);
-
           reverseGeocodeRequest(
             location.coords.latitude + "," + location.coords.longitude
           ).then((result) => {
             const formattedResponse = camelize(result);
             formattedResponse.results.forEach((element) => {
-              console.log(element);
               if (element.types.includes("street_address")) {
                 setKeyword(element.addressComponents[2].longName);
               }

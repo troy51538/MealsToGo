@@ -33,13 +33,12 @@ export const Search = ({}) => {
         }
 
         let location = await Location.getCurrentPositionAsync({});
-
-        console.log(location.coords);
-
+        console.log(location);
         reverseGeocodeRequest(
           location.coords.latitude + "," + location.coords.longitude
         ).then((result) => {
           const formattedResponse = camelize(result);
+          console.log(formattedResponse);
           formattedResponse.results.forEach((element) => {
             if (element.types.includes("street_address")) {
               setSearchkeyword(element.addressComponents[2].longName);
