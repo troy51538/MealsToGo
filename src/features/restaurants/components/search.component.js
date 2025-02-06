@@ -8,7 +8,8 @@ import { isMock } from "../../../utils/env";
 import camelize from "camelize";
 
 const SearchComponent = styled.View`
-  padding: ${(props) => props.theme.sizes[3]};
+  padding-horizontal: ${(props) => props.theme.sizes[3]};
+  padding-bottom: ${(props) => props.theme.sizes[3]};
 `;
 
 export const Search = ({}) => {

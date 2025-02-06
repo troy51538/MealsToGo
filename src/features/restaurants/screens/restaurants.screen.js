@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
+  Text,
+  Button,
 } from "react-native";
 import { RestaurantInfoCard } from "../components/restaurant-info.components";
 import styled from "styled-components/native";
@@ -18,6 +20,8 @@ import { Search } from "../components/search.component";
 import { FadeInView } from "../../../components/animations/fade.animation";
 import { NoRestaurantsComponent } from "../components/restaurants-empty.component";
 import { TopPicks } from "../../../components/restaurant/toppicks.component";
+import { OrderButton } from "../../../components/restaurant/order-button.component";
+import { OrderAgain } from "../../../components/restaurant/order-again.component";
 
 const RestaurantList = styled.View`
   flex: 1;
@@ -32,8 +36,9 @@ export const RestaurantsScreen = ({ navigation }) => {
   return (
     <>
       <SafeAreaView style={styles.container}>
+        <Search />
+
         <ScrollView>
-          <Search />
           <FavouritesBar
             favourites={favourites}
             onNavigate={navigation.navigate}
@@ -46,9 +51,26 @@ export const RestaurantsScreen = ({ navigation }) => {
           )}
 
           <View
-            style={{ borderColor: "blue", borderWidth: 2, marginBottom: 30 }}
+            style={{
+              borderColor: "blue",
+              borderWidth: 2,
+              marginBottom: 30,
+            }}
           >
-            <TopPicks onNavigate={navigation.navigate}></TopPicks>
+            <OrderAgain></OrderAgain>
+          </View>
+
+          <View
+            style={{
+              borderColor: "blue",
+              borderWidth: 2,
+              marginBottom: 30,
+            }}
+          >
+            <TopPicks
+              onNavigate={navigation.navigate}
+              isLoading={false}
+            ></TopPicks>
           </View>
 
           <FlatList
@@ -73,6 +95,8 @@ export const RestaurantsScreen = ({ navigation }) => {
             ListEmptyComponent={!isLoading && NoRestaurantsComponent}
           />
         </ScrollView>
+
+        <OrderButton></OrderButton>
       </SafeAreaView>
     </>
   );
@@ -81,7 +105,7 @@ export const RestaurantsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight,
+    // marginTop: StatusBar.currentHeight,
   },
   search: {
     padding: 16,

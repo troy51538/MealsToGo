@@ -1,7 +1,12 @@
 import React from "react";
 import { FlatList } from "react-native";
 
-export const Carousel = ({ renderItem, renderCaption, data = null }) => {
+export const Carousel = ({
+  renderItem,
+  renderCaption,
+  data = null,
+  keyExtractor = null,
+}) => {
   return (
     <>
       {renderCaption()}
@@ -10,6 +15,13 @@ export const Carousel = ({ renderItem, renderCaption, data = null }) => {
         data={data}
         renderItem={renderItem}
         contentContainerStyle={{ padding: 16 }}
+        keyExtractor={
+          keyExtractor
+            ? keyExtractor
+            : (item, index) => {
+                index.toString();
+              }
+        }
       />
     </>
   );

@@ -4,11 +4,11 @@ import { Spacer } from "../spacer/spacer.component";
 import CompactRestaurantInfo from "./compact-restaurant-info.component";
 import { Carousel } from "./carousel.component";
 
-export const TopPicks = ({ onNavigate }) => {
+export const TopPicks = ({ onNavigate, isLoading = false, data = null }) => {
   const renderItem = ({ item, index }) => {
     return (
       <Spacer position="left">
-        <CompactRestaurantInfo restaurant={null} />
+        <CompactRestaurantInfo />
       </Spacer>
     );
   };
@@ -20,8 +20,8 @@ export const TopPicks = ({ onNavigate }) => {
 
     return (
       <View style={{ paddingHorizontal: 20, paddingTop: 10 }}>
-        <Text style={{ fontSize: 50 }} numberOfLines={2}>
-          EVEN BIGGER
+        <Text style={{ fontSize: 50, fontStyle: "italic" }} numberOfLines={2}>
+          Indulge with
         </Text>
 
         <View
@@ -32,7 +32,7 @@ export const TopPicks = ({ onNavigate }) => {
             width: "100%",
           }}
         >
-          <Text style={{ fontSize: 30 }}>NEXT TITLE</Text>
+          <Text style={{ fontSize: 30 }}>Top Picks</Text>
           <TouchableOpacity onPress={captionAction}>
             <Text
               style={{
@@ -41,7 +41,7 @@ export const TopPicks = ({ onNavigate }) => {
                 textDecorationLine: "underline",
               }}
             >
-              go to account
+              View Full Menu
             </Text>
           </TouchableOpacity>
         </View>
@@ -66,8 +66,8 @@ export const TopPicks = ({ onNavigate }) => {
       {/* horizontal scroll part */}
       <Carousel
         renderCaption={renderCaption}
+        data={data ? data : [0, 1, 2, 3, 4, 5, 6, 1, 1, 1, 1, 1, 1, 1]}
         renderItem={renderItem}
-        data={[0, 1, 2, 3, 4, 5, 6, 1, 1, 1, 1, 1, 1, 1]}
       ></Carousel>
     </>
   );
