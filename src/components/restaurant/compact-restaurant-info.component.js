@@ -8,7 +8,7 @@ import { Text } from "../typography/text.component";
 const CompactImage = styled.Image`
   border-radius: 10px;
   width: 120px;
-  height: 300px;
+  height: 200px;
 `;
 
 const CompactWebview = styled(WebView)`

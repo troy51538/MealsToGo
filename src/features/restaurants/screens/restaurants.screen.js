@@ -5,16 +5,19 @@ import {
   SafeAreaView,
   FlatList,
   TouchableOpacity,
+  View,
+  ScrollView,
 } from "react-native";
 import { RestaurantInfoCard } from "../components/restaurant-info.components";
 import styled from "styled-components/native";
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
 import { FavouritesContext } from "../../../services/favourites/favourites.context";
 import { FavouritesBar } from "../../../components/favourites/favourites-bar.component";
-import { ActivityIndicator, Colors } from "react-native-paper";
+import { ActivityIndicator } from "react-native-paper";
 import { Search } from "../components/search.component";
 import { FadeInView } from "../../../components/animations/fade.animation";
 import { NoRestaurantsComponent } from "../components/restaurants-empty.component";
+import { TopPicks } from "../../../components/restaurant/toppicks.component";
 
 const RestaurantList = styled.View`
   flex: 1;
@@ -29,38 +32,47 @@ export const RestaurantsScreen = ({ navigation }) => {
   return (
     <>
       <SafeAreaView style={styles.container}>
-        <Search />
-        <FavouritesBar
-          favourites={favourites}
-          onNavigate={navigation.navigate}
-        ></FavouritesBar>
-        {isLoading && (
-          <ActivityIndicator
-            animating={true}
-            color="#999999"
-          ></ActivityIndicator>
-        )}
-        <FlatList
-          data={restaurants}
-          renderItem={({ item }) => {
-            return (
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate("RestaurantDetail", {
-                    restaurant: item,
-                  })
-                }
-              >
-                <FadeInView>
-                  <RestaurantInfoCard restaurant={item} />
-                </FadeInView>
-              </TouchableOpacity>
-            );
-          }}
-          keyExtractor={(item) => item.name}
-          contentContainerStyle={{ padding: 16 }}
-          ListEmptyComponent={!isLoading && NoRestaurantsComponent}
-        />
+        <ScrollView>
+          <Search />
+          <FavouritesBar
+            favourites={favourites}
+            onNavigate={navigation.navigate}
+          ></FavouritesBar>
+          {isLoading && (
+            <ActivityIndicator
+              animating={true}
+              color="#999999"
+            ></ActivityIndicator>
+          )}
+
+          <View
+            style={{ borderColor: "blue", borderWidth: 2, marginBottom: 30 }}
+          >
+            <TopPicks onNavigate={navigation.navigate}></TopPicks>
+          </View>
+
+          <FlatList
+            data={restaurants}
+            renderItem={({ item }) => {
+              return (
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("RestaurantDetail", {
+                      restaurant: item,
+                    })
+                  }
+                >
+                  <FadeInView>
+                    <RestaurantInfoCard restaurant={item} />
+                  </FadeInView>
+                </TouchableOpacity>
+              );
+            }}
+            keyExtractor={(item) => item.name}
+            contentContainerStyle={{ padding: 16 }}
+            ListEmptyComponent={!isLoading && NoRestaurantsComponent}
+          />
+        </ScrollView>
       </SafeAreaView>
     </>
   );
